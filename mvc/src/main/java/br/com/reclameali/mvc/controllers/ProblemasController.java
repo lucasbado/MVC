@@ -9,9 +9,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class ProblemasController {
 
     @GetMapping("/problemas")
-    public String hello(Model model){
-        model.addAttribute("Teste");
+    public String index(Model model){
+        model.addAttribute("name", "World");
         return "index";
     }
+    
     
 }

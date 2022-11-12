@@ -1,7 +1,6 @@
 package br.com.reclameali.mvc.model;
 
 import java.util.Date;
-import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -9,9 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -22,34 +19,45 @@ import javax.persistence.Table;
 public class Problema {
 
     @Id
-    @Column(name = "cd_problema")
+    @Column(name= "cd_problema")
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SQ_PROBLEMA")
     private Long id;
 
-    @Column(name = "titulo")
+    @Column(name= "nm_problema")
     private String name;
 
-    @Column(name = "comentario")
+    @Column(name= "ds_problema")
     private String problem;
 
-    @Column(name = "categoria")
+    @Column(name="ds_tipo")
     private String type;
 
+    @Column(name= "dt_criacao")
+    private Date create;
 
-    @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "TB_USUARIO_PROBLEMA", joinColumns = @JoinColumn(name = "cd_problema"),
-    inverseJoinColumns = @JoinColumn(name = "cd_usuario"))
-    private List<Usuario> usuarios;
+    @Column(name= "dt_alteracao")
+    private Date change;
 
-    public Problema() {
-    }
+    @ManyToOne(cascade = CascadeType.ALL)
+    private Usuario usuario;
 
-    public Problema(Long id, String name, String problem, String type, Date create, Date change, List<Usuario> usuarios) {
+    @ManyToOne(cascade = CascadeType.ALL)
+    private Endereco endereco;
+
+
+    public Problema(){}
+
+
+    public Problema(Long id, String name, String problem, String type, Date create,
+                    Date change, Usuario usuario, Endereco endereco) {
         this.id = id;
         this.name = name;
         this.problem = problem;
         this.type = type;
-        this.usuarios = usuarios;
+        this.create = create;
+        this.change = change;
+        this.usuario = usuario;
+        this.endereco = endereco;
     }
 
     public Long getId() {
@@ -60,9 +68,7 @@ public class Problema {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
-    }
+    public String getName() {return name;}
 
     public void setName(String name) {
         this.name = name;
@@ -76,19 +82,36 @@ public class Problema {
         this.problem = problem;
     }
 
-    public String getType() {
-        return type;
-    }
+    public String getType() {return type;}
 
     public void setType(String type) {
         this.type = type;
     }
 
-    public List<Usuario> getUsuarios() {
-        return usuarios;
+    public Date getCreate() {
+        return create;
     }
 
-    public void setUsuarios(List<Usuario> usuarios) {
-        this.usuarios = usuarios;
+    public void setCreate(Date create) {this.create = create;}
+
+    public Date getChange() {
+        return change;
     }
+
+    public void setChange(Date change) {
+        this.change = change;
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
+
+    public Endereco getEndereco() {return endereco;}
+
+    public void setEndereco(Endereco endereco) {this.endereco = endereco;}
+
 }

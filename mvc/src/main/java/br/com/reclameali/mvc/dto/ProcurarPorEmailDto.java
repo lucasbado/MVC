@@ -36,8 +36,13 @@ public class ProcurarPorEmailDto {
 
 
 
-    public ProcurarPorEmailDto(Long id, String name, String surname, String email,
-                               String password, Date birth, Date create, Date change, List<Problema> problemas) {
+    public ProcurarPorEmailDto() {
+    }
+
+
+    public ProcurarPorEmailDto(Long id, String name, String surname,
+                               String email, String password, Date birth, Date create,
+                               Date change, List<Problema> problemas) {
         this.id = id;
         this.name = name;
         this.surname = surname;
@@ -48,6 +53,8 @@ public class ProcurarPorEmailDto {
         this.change = change;
         this.problemas = problemas;
     }
+
+
 
     public Long getId() {
         return id;

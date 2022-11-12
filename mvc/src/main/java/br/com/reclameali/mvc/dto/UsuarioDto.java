@@ -1,9 +1,6 @@
 package br.com.reclameali.mvc.dto;
 
 import java.util.Date;
-import java.util.List;
-
-import br.com.reclameali.mvc.model.Endereco;
 
 public class UsuarioDto {
 
@@ -17,15 +14,12 @@ public class UsuarioDto {
 
     private Date birth;
 
-    private List<Endereco> enderecos;
-
-    public UsuarioDto(String name, String surname, String email, String password, Date birth, List<Endereco> enderecos) {
+    public UsuarioDto(String name, String surname, String email, String password, Date birth) {
         this.name = name;
         this.surname = surname;
         this.email = email;
         this.password = password;
         this.birth = birth;
-        this.enderecos = enderecos;
     }
 
     public String getName() {
@@ -66,13 +60,5 @@ public class UsuarioDto {
 
     public void setBirth(Date birth) {
         this.birth = birth;
-    }
-
-    public List<Endereco> getEnderecos() {
-        return enderecos;
-    }
-
-    public void setEnderecos(List<Endereco> enderecos) {
-        this.enderecos = enderecos;
     }
 }

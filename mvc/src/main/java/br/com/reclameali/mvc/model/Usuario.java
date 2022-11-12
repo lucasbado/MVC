@@ -1,9 +1,17 @@
 package br.com.reclameali.mvc.model;
 
-import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
-import java.util.Set;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
 
 @Table(name= "TB_USUARIO")
 @SequenceGenerator(name= "SQ_USUARIO", sequenceName = "SQ_USUARIO", initialValue = 1)
@@ -36,22 +44,13 @@ public class Usuario {
     @Column(name= "dt_alteracao")
     private Date change;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "usuario")
     private List<Problema> problemas;
-
-
-    @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(
-            name = "TB_USUARIO_ENDERECO",
-            joinColumns = @JoinColumn(name = "cd_usuario"),
-            inverseJoinColumns = @JoinColumn(name = "cd_endereco"))
-    private List<Endereco> enderecos;
 
     public Usuario(){}
 
-
-    public Usuario(Long id, String name, String surname, String email, String password, Date birth, Date create,
-                   Date change, List<Problema> problemas, List<Endereco> enderecos) {
+    public Usuario(Long id, String name, String surname, String email, String password,
+                   Date birth, Date create, Date change, List<Problema> problemas) {
         this.id = id;
         this.name = name;
         this.surname = surname;
@@ -61,16 +60,13 @@ public class Usuario {
         this.create = create;
         this.change = change;
         this.problemas = problemas;
-        this.enderecos = enderecos;
     }
 
     public Long getId() {
         return id;
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+    public void setId(Long id) {this.id = id;}
 
     public String getName() {
         return name;
@@ -128,19 +124,7 @@ public class Usuario {
         this.change = change;
     }
 
-    public List<Problema> getProblemas() {
-        return problemas;
-    }
+    public List<Problema> getProblemas() {return problemas;}
 
-    public void setProblemas(List<Problema> problemas) {
-        this.problemas = problemas;
-    }
-
-    public List<Endereco> getEnderecos() {
-        return enderecos;
-    }
-
-    public void setEnderecos(List<Endereco> enderecos) {
-        this.enderecos = enderecos;
-    }
+    public void setProblemas(List<Problema> problemas) {this.problemas = problemas;}
 }
